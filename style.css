@@ -1,0 +1,64 @@
+:root {
+            --bg-green: #567257;
+            --card-grey: #D9D8D5;
+            --text-dark: #2A2420;
+            --btn-brown: #896A58;
+            --accent-sage: #ACAB9E;
+        }
+
+        body { 
+            background: var(--bg-green); 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            font-family: 'Segoe UI', sans-serif; 
+        }
+
+        .login-card { 
+            border: none; 
+            border-radius: 25px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
+            background: var(--card-grey); 
+            padding: 40px; 
+            color: var(--text-dark);
+        }
+
+        /* Icon color change */
+        .fa-graduation-cap {
+            color: var(--bg-green) !important;
+        }
+
+        .btn-primary { 
+            background: var(--btn-brown) !important; 
+            border: none; 
+            padding: 12px; 
+            border-radius: 12px; 
+            font-weight: 600; 
+            transition: 0.3s; 
+            color: white !important;
+        }
+
+        .btn-primary:hover { 
+            background: var(--text-dark) !important; 
+            transform: translateY(-2px); 
+        }
+
+        .form-control { 
+            border-radius: 12px; 
+            padding: 12px; 
+            border: 1px solid var(--accent-sage); 
+            background: white;
+            color: var(--text-dark);
+        }
+
+        .form-control:focus { 
+            box-shadow: 0 0 0 4px rgba(86, 114, 87, 0.1); 
+            border-color: var(--bg-green); 
+        }
+
+        .text-secondary, .text-muted {
+            color: var(--text-dark) !important;
+            opacity: 0.7;
+        }
+
+        h2 { color: var(--text-dark); }
