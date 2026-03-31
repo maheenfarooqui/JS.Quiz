@@ -29,7 +29,8 @@ function startQuiz() {
 var stdName = document.getElementById("stdName");
 
 var storeName = localStorage.getItem("userName");
-stdName.innerText = storeName;
+var stdcapitalName =storeName.slice(0,1).toUpperCase() + storeName.slice(1);
+stdName.innerText = stdcapitalName;
 
 myAlert("Login Successful!", "Welcome back!", "success", "Continue", "#896A58")
 
@@ -221,7 +222,7 @@ function submitQuize() {
   document.getElementById("resultScreen").innerHTML = `<div class="quiz-card">
                     <h5 class="text-uppercase tracking-wider text-secondary fw-bold">Your Performance</h5>
                     <h1 class="display-1 fw-bold text-primary mt-3" id="percValue">${percentage}%</h1>
-                    <p class="lead fw-medium" id="scoreText">You scored ${score} out of ${questions.length} ${storeName}</p>
+                    <p class="lead fw-medium" id="scoreText">You scored ${score} out of ${questions.length} ${stdcapitalName}</p>
                     <hr class="my-4 mx-auto w-25" style="border-top: 2px solid var(--accent-sage);">
                     <button class="btn btn-primary btn-nav px-5 text-white" onclick="location.reload()">Retake Quiz</button>
                 </div>`;
