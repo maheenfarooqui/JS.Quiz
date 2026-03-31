@@ -1,64 +1,145 @@
+/* 1. Global Variables & Reset */
 :root {
-            --bg-green: #567257;
-            --card-grey: #D9D8D5;
-            --text-dark: #2A2420;
-            --btn-brown: #896A58;
-            --accent-sage: #ACAB9E;
-        }
+    --bg-green: #567257;
+    --card-grey: #D9D8D5;
+    --text-dark: #2A2420;
+    --btn-brown: #896A58;
+    --accent-sage: #ACAB9E;
+}
 
-        body { 
-            background: var(--bg-green); 
-            min-height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            font-family: 'Segoe UI', sans-serif; 
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .login-card { 
-            border: none; 
-            border-radius: 25px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
-            background: var(--card-grey); 
-            padding: 40px; 
-            color: var(--text-dark);
-        }
+body { 
+    background: var(--bg-green); 
+    font-family: 'Segoe UI', sans-serif; 
+    min-height: 100vh;
+}
+.fa-graduation-cap{
+    color: var(--bg-green);
+}
+/* 2. Header & Navigation (Fixed) */
+.quiz-header {
+    background: var(--card-grey) !important;
+    border-bottom: 2px solid var(--accent-sage);
+    padding: 10px 0;
+    z-index: 1050;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
 
-        /* Icon color change */
-        .fa-graduation-cap {
-            color: var(--bg-green) !important;
-        }
 
-        .btn-primary { 
-            background: var(--btn-brown) !important; 
-            border: none; 
-            padding: 12px; 
-            border-radius: 12px; 
-            font-weight: 600; 
-            transition: 0.3s; 
-            color: white !important;
-        }
 
-        .btn-primary:hover { 
-            background: var(--text-dark) !important; 
-            transform: translateY(-2px); 
-        }
+.user-avatar {
+    width: 38px;
+    height: 38px;
+    background: white;
+    border: 2px solid var(--accent-sage);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg-green);
+    font-size: 1.1rem;
+}
 
-        .form-control { 
-            border-radius: 12px; 
-            padding: 12px; 
-            border: 1px solid var(--accent-sage); 
-            background: white;
-            color: var(--text-dark);
-        }
+.btn-logout {
+    background: transparent;
+    border: 1px solid var(--btn-brown);
+    color: var(--btn-brown);
+    border-radius: 10px;
+    padding: 6px 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: 0.3s;
+}
 
-        .form-control:focus { 
-            box-shadow: 0 0 0 4px rgba(86, 114, 87, 0.1); 
-            border-color: var(--bg-green); 
-        }
+.btn-logout:hover {
+    background: var(--btn-brown);
+    color: white;
+}
 
-        .text-secondary, .text-muted {
-            color: var(--text-dark) !important;
-            opacity: 0.7;
-        }
+/* 3. Cards & Containers */
+.quiz-card, .login-card { 
+    background: var(--card-grey); 
+    border: none; 
+    border-radius: 20px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+    padding: 35px; 
+    color: var(--text-dark);
+}
 
-        h2 { color: var(--text-dark); }
+/* 4. Form Elements & Radio Buttons */
+.form-control { 
+    border-radius: 12px; 
+    padding: 12px; 
+    border: 1px solid var(--accent-sage); 
+    background: white;
+}
+
+.form-control:focus { 
+    box-shadow: 0 0 0 4px rgba(86, 114, 87, 0.1); 
+    border-color: var(--bg-green); 
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px 20px;
+    border: 2px solid var(--accent-sage);
+    border-radius: 15px;
+    margin-bottom: 12px;
+    background: white;
+    transition: 0.3s;
+    position: relative;
+}
+
+.option-label input[type="radio"] { display: none; }
+
+.option-label::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--accent-sage);
+    border-radius: 50%;
+    margin-right: 15px;
+    display: inline-block;
+    transition: 0.2s;
+    background: white;
+}
+
+.option-label:hover {
+    border-color: var(--btn-brown);
+    background-color: #fdfaf9;
+}
+
+.option-label:has(input:checked) {
+    border-color: var(--btn-brown);
+    background-color: #f5f3ff;
+}
+
+.option-label:has(input:checked)::before {
+    background-color: var(--btn-brown);
+    border-color: var(--btn-brown);
+    box-shadow: inset 0 0 0 4px white;
+}
+
+/* 5. Progress & Utility */
+.progress { height: 8px; border-radius: 10px; background: rgba(0,0,0,0.1); }
+.progress-bar { background: var(--btn-brown); border-radius: 10px; }
+
+.btn-nav { border-radius: 10px; padding: 10px 25px; font-weight: 600; transition: 0.3s; }
+.btn-primary { background: var(--btn-brown) !important; border: none !important; color: white !important; }
+.btn-primary:hover { background: var(--text-dark) !important; transform: translateY(-2px); }
+
+.btn-light { background: white; border: 1px solid var(--accent-sage); color: var(--text-dark); }
+.btn-success { background: var(--bg-green) !important; border: none !important; color: white !important; }
+
+.text-primary { color: var(--bg-green) !important; }
+.text-secondary, .text-muted { color: var(--text-dark) !important; opacity: 0.7; }
+
