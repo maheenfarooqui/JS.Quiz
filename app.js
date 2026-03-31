@@ -3,20 +3,23 @@ var rollNo = document.getElementById("rollNo");
 var qIndex = 0;
 var answersArr = [];
 var score = 0;
+
+function myAlert(title, text, icon, btnText = "Got it!", btnColor = "#567257") {
+    return Swal.fire({
+        title: title,
+        text: text,
+        icon: icon,
+        iconColor: icon === "success" || icon === "info" ? "#567257" : "#896A58",
+        background: "#D9D8D5",
+        color: "#2A2420",
+        confirmButtonText: btnText,
+        confirmButtonColor: btnColor,
+        backdrop: `rgba(42, 36, 32, 0.4)`
+    });
+}
 function startQuiz() {
   if (userName.value.trim() === "" && rollNo.value.trim() === "") {
-    Swal.fire({
-      title: "Wait a moment!",
-      text: "Please enter your name and roll number to begin.",
-      icon: "warning",
-      iconColor: "#896A58",
-      background: "#D9D8D5",
-      color: "#2A2420",
-      confirmButtonText: "Got it!",
-      confirmButtonColor: "#567257",
-      buttonsStyling: true,
-      backdrop: `rgba(42, 36, 32, 0.4)`,
-    });
+   myAlert("Wait a moment!", "Please enter your name and roll number.", "warning");
   } else {
     localStorage.setItem("userName", userName.value);
 
@@ -28,16 +31,7 @@ var stdName = document.getElementById("stdName");
 var storeName = localStorage.getItem("userName");
 stdName.innerText = storeName;
 
-Swal.fire({
-  title: "Login Successful!",
-  text: "Welcome back! Let's start the quiz.",
-  icon: "success",
-  iconColor: "#567257",
-  background: "#D9D8D5",
-  color: "#2A2420",
-  confirmButtonText: "Continue",
-  confirmButtonColor: "#896A58",
-});
+myAlert("Login Successful!", "Welcome back!", "success", "Continue", "#896A58")
 
 var questions = [
   {
@@ -173,22 +167,13 @@ displyaQuestions();
 function nextQ() {
   var tickOpt = document.querySelector("input[name = 'option']:checked");
   if (!tickOpt) {
-    Swal.fire({
-      title: "Wait a moment!",
-      text: "Please select an answer before moving to the next question.",
-      icon: "warning",
-      iconColor: "#896A58",
-      background: "#D9D8D5",
-      color: "#2A2420",
-      confirmButtonText: "Got it!",
-      confirmButtonColor: "#567257", 
-    });
+   myAlert("Wait a moment!", "Please select an answer to proceed.", "warning");
     return;
   } else {
     answersArr[qIndex] = tickOpt.value;
   }
-  console.log(answersArr,tickOpt.value);
-  
+  console.log(answersArr, tickOpt.value);
+
   if (qIndex < questions.length - 1) {
     qIndex++;
     displyaQuestions();
@@ -212,16 +197,7 @@ function previousQ() {
     qIndex--;
     displyaQuestions();
   } else {
-    Swal.fire({
-      title: "Start of Quiz!",
-      text: "This is the very first question. You can't go back further.",
-      icon: "info",
-      iconColor: "#567257",
-      background: "#D9D8D5",
-      color: "#2A2420",
-      confirmButtonText: "I'll Move Forward",
-      confirmButtonColor: "#896A58",
-    });
+    myAlert("Start of Quiz!", "This is the very first question.", "info", "I'll Move Forward", "#896A58");
   }
 }
 
@@ -233,14 +209,13 @@ function goBack() {
 
 function submitQuize() {
   score = 0;
-  for(var i = 0 ; i < answersArr.length ; i++){
-    if(answersArr[i] === questions[i].answer){
-      score++
+  for (var i = 0; i < answersArr.length; i++) {
+    if (answersArr[i] === questions[i].answer) {
+      score++;
     }
   }
-  var percentage = (score / questions.length )*100
-  console.log(score,percentage,questions.length);
-  
+  var percentage = (score / questions.length) * 100;
+  console.log(score, percentage, questions.length);
 
   document.getElementById("submitScreen").style.display = "none";
   document.getElementById("resultScreen").innerHTML = `<div class="quiz-card">
