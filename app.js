@@ -3,6 +3,7 @@ var rollNo = document.getElementById("rollNo");
 var qIndex = 0;
 var answersArr = [];
 var score = 0;
+var progresValue = 10;
 
 function myAlert(title, text, icon, btnText = "Got it!", btnColor = "#567257") {
     return Swal.fire({
@@ -37,7 +38,7 @@ myAlert("Login Successful!", "Welcome back!", "success", "Continue", "#896A58")
 var questions = [
   {
     question:
-      "Q1: What is the primary purpose of the const keyword in JavaScript?",
+      ": What is the primary purpose of the const keyword in JavaScript?",
     opt1: "It prevents a variable's value from being re-assigned.",
     opt2: "It always makes a variable global.",
     opt3: "It can only be used for numbers.",
@@ -46,7 +47,7 @@ var questions = [
   },
   {
     question:
-      "Q2: Which array method adds a new element to the end of an array?",
+      ": Which array method adds a new element to the end of an array?",
     opt1: "pop()",
     opt2: "push()",
     opt3: "shift()",
@@ -54,7 +55,7 @@ var questions = [
     answer: "push()",
   },
   {
-    question: "Q3: What is the difference between === and ==?",
+    question: ": What is the difference between === and ==?",
     opt1: "They perform exactly the same function.",
     opt2: "=== checks both value and data type (Strict Equality).",
     opt3: "== only checks the data type.",
@@ -63,7 +64,7 @@ var questions = [
   },
   {
     question:
-      "Q4: Which of the following is the correct syntax for an Arrow Function?",
+      ": Which of the following is the correct syntax for an Arrow Function?",
     opt1: "function => {}",
     opt2: "arrow() -> {}",
     opt3: "() => {}",
@@ -71,7 +72,7 @@ var questions = [
     answer: "() => {}",
   },
   {
-    question: "Q5: Which symbol is used for Template Literals?",
+    question: ": Which symbol is used for Template Literals?",
     opt1: 'Double Quotes ("")',
     opt2: "Single Quotes ('')",
     opt3: "Backticks (`)",
@@ -79,7 +80,7 @@ var questions = [
     answer: "Backticks (`)",
   },
   {
-    question: "Q6: What does the map() method return?",
+    question: ": What does the map() method return?",
     opt1: "Only true or false.",
     opt2: "A new array with the results of calling a function on every element.",
     opt3: "The total length of the array.",
@@ -89,7 +90,7 @@ var questions = [
   },
   {
     question:
-      "Q7: Which ES6 feature is used to extract data from objects into distinct variables?",
+      ": Which ES6 feature is used to extract data from objects into distinct variables?",
     opt1: "Spread Operator",
     opt2: "Destructuring",
     opt3: "Hoisting",
@@ -97,7 +98,7 @@ var questions = [
     answer: "Destructuring",
   },
   {
-    question: "Q8: What does JSON stand for?",
+    question: ": What does JSON stand for?",
     opt1: "Java Standard Object Notation",
     opt2: "Java Serialized Object Network",
     opt3: "JavaScript Online Node",
@@ -105,7 +106,7 @@ var questions = [
     answer: "JavaScript Object Notation",
   },
   {
-    question: "Q9: What are Async/Await used for in JavaScript?",
+    question: ": What are Async/Await used for in JavaScript?",
     opt1: "Handling Promises and asynchronous code more cleanly.",
     opt2: "Handling CSS Animations.",
     opt3: "Selecting HTML Elements.",
@@ -113,7 +114,7 @@ var questions = [
     answer: "Handling Promises and asynchronous code more cleanly.",
   },
   {
-    question: "Q10: Which of these is NOT a primitive data type in JavaScript?",
+    question: ": Which of these is NOT a primitive data type in JavaScript?",
     opt1: "String",
     opt2: "Boolean",
     opt3: "Array",
@@ -127,16 +128,16 @@ function displyaQuestions() {
   document.getElementById("display").innerHTML = `<div id="quizContainer">
                 <div class="mb-4">
                     <div class="d-flex justify-content-between small fw-bold mb-2 text-white">
-                        <span>Question <span id="currentQ">1</span> of 10</span>
+                        <span>Question <span id="currentQ">${qIndex + 1}</span> of 10</span>
                         <span>Keep going!</span>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" style="width: 10%"></div>
+                        <div id="progress" class="progress-bar" style="width: 10%"></div>
                     </div>
                 </div>
 
                 <div class="quiz-card mb-4" id="displayArea">
-                    <h3 class="fw-bold mb-4">${questions[qIndex].question}</h3>
+                    <h3 class="fw-bold mb-4">Q${qIndex + 1}${questions[qIndex].question}</h3>
                     <div class="options-group">
                         <label class="option-label">
                             <input type="radio" name="option" class="d-none" value="${questions[qIndex].opt1}">
@@ -173,8 +174,6 @@ function nextQ() {
   } else {
     answersArr[qIndex] = tickOpt.value;
   }
-  console.log(answersArr, tickOpt.value);
-
   if (qIndex < questions.length - 1) {
     qIndex++;
     displyaQuestions();
@@ -192,6 +191,11 @@ function nextQ() {
                     </div>
                 </div>`;
   }
+  progresValue += 10;
+  var progres = document.getElementById("display").children[0].children[0].children[1].children[0];
+  progres.style.width = `${progresValue}%`
+  
+  
 }
 function previousQ() {
   if (qIndex > 0) {
