@@ -4,6 +4,7 @@ var qIndex = 0;
 var answersArr = [];
 var score = 0;
 var progresValue = 10;
+var myQuizWindow;
 
 function myAlert(title, text, icon, btnText = "Got it!", btnColor = "#567257") {
     return Swal.fire({
@@ -24,7 +25,8 @@ function startQuiz() {
   } else {
     localStorage.setItem("userName", userName.value);
 
-    window.location.href = "quiz.html";
+    // window.location.href = "quiz.html";
+    myQuizWindow = window.open("quiz.html", "QuizWindow", "width=800,height=700,left=200,top=100");
   }
 }
 var stdName = document.getElementById("stdName");
@@ -213,6 +215,7 @@ function goBack() {
 }
 
 function submitQuize() {
+
   score = 0;
   for (var i = 0; i < answersArr.length; i++) {
     if (answersArr[i] === questions[i].answer) {
@@ -229,9 +232,17 @@ function submitQuize() {
                     <p class="lead fw-medium" id="scoreText">You scored ${score} out of ${questions.length} ${stdcapitalName}</p>
                     <hr class="my-4 mx-auto w-25" style="border-top: 2px solid var(--accent-sage);">
                     <button class="btn btn-primary btn-nav px-5 text-white" onclick="location.reload()">Retake Quiz</button>
+                    <button class="btn btn-primary btn-nav px-5 text-white" onclick="finishQuiz()">Finish Quiz</button>
                 </div>`;
+                
+      
+    
 }
 
 function logout() {
   window.location.href = "index.html";
+}
+function finishQuiz() {
+    window.close();
+
 }
